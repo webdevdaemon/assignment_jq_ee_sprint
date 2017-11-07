@@ -1,0 +1,22 @@
+body {
+  height: 100vh;
+  width: 100vw;
+  /* Chrome 10+,Safari */
+  background: -webkit-linear-gradient(bottom, rgb(0, 0, 0) 09%, rgb(58, 180, 196) 73%);
+  /* Firefox 4+ */
+  background: -moz-linear-gradient(bottom, rgb(0, 0, 0) 09%, rgb(58, 180, 196) 73%);
+  /* Opera */
+  background: -o-linear-gradient(bottom, rgb(0, 0, 0) 09%, rgb(58, 180, 196) 73%);
+  /* IE 10+ */
+  background: -ms-linear-gradient(bottom, rgb(0, 0, 0) 09%, rgb(58, 180, 196) 73%);
+  /* W3C */
+  background: -linear-gradient(bottom, rgb(0, 0, 0) 09%, rgb(58, 180, 196) 73%);
+}
+
+h1 {
+  font-family: 'bungee', 'avenir', 'helvetica', sans-serif;
+}
+
+a {
+  font-family: 'alegreya sans sc', 'lucida sans', serif;
+}

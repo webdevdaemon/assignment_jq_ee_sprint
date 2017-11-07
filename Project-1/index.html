@@ -1,0 +1,96 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Events & FX: Project 1 - FORM VALIDATION </title>
+  <script src="http://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+    crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+  <link href="style.css" rel="stylesheet">
+  </script>
+</head>
+
+<body>
+  <!-- SUCCESS OVERLAY BEGIN -->
+<div class="overlay-wrapper">
+  <div class="overlay">
+    <div class="modal">
+      <h2 class="modal-title">CONGRATS!!!</h2>
+      <h5 class="modal-subtitle">
+      If this was <b>REAL LIFE</b>, you would be the newest member of the coolest website ever created!!!
+      </h5>
+      <p class="modal-content">
+        Meanwhile, on the backend, a shiny new user object would be
+        parsed and submitted to the coolest database ever created!
+        It would most likely be in the form of a JSON object,
+        which would look something like this:
+      </p>
+      <pre>
+{
+  "new_user" : {
+    "username" : <span class="modal-username"></span>,
+    "summary" : <span class="modal-summary"></span>,
+    "password" : <span class="modal-password"></span>
+  }
+}
+      </pre>
+      <p class="modal-content">
+        Once your profile had been created, you'd likely be sent an email
+        with a confirmation link, or be redirected to the login form so
+        you could SIGN IN and make it official. ISN'T THAT EXCITING!?!?
+      </p>
+      <div class="buttons">
+        <button class="reset">
+          Reset Form Exercise
+        </button>
+        <button class="redirect">
+          Back to Homepage
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- SUCCESS OVERLAY END -->
+
+  <div class="content">
+    <h1 class="main-title">PROJECT 1: FORM VALIDATION</h1>
+    <h3 class="form-title">New User Signup</h3>
+    <div class="form-wrapper">
+      <form class="signup">
+        <div class="flex-row">
+          <label for="name" class="label" id="label-name">Enter Username</label>
+          <span class="counter counter-1"></span>
+        </div>
+
+        <input type="text" class="input-text" id="username" name="name" min="4" maxlength="32">
+
+        <div class="flex-row">
+          <label for="text-area" class="label" id="label-text-area">Enter Profile Summary</label>
+          <span class="counter counter-2"></span>
+        </div>
+
+        <textarea id="text-area" cols="30" rows="10" class="input-text-area" name="input-text-area" min="4" maxlength="140"></textarea>
+
+        <label for="password" class="label" id="label-password">Enter Password
+        <small>(6-16 characters)</small>
+      </label>
+        <input type="password" class="input-password password" id="password" name="password" min="6" maxlength="16">
+
+        <div class="flex-row">
+          <label for="confirmation" class="label" id="label-confirmation">
+          Confirm Password
+        </label>
+          <span class="password-msg"></span>
+        </div>
+
+        <input type="password" class="input-confirmation password" id="confirmation" name="confirmation" min="6" maxlength="16">
+
+        <input type="submit" class="submit" id="submit" value="Create User">
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
