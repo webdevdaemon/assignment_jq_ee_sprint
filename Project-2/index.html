@@ -1,22 +1,34 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <title>JavaScript Example</title>
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="index.js"></script>
   <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
-  <h1>Hello from HTML!</h1>
-  <p class="content">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt placeat nam animi reiciendis non, pariatur, laudantium esse iste excepturi voluptate iusto? Nostrum facere laboriosam rem impedit quam dignissimos assumenda? Harum adipisci corporis officia
-    consectetur in asperiores perspiciatis reiciendis praesentium autem repudiandae voluptatum vitae animi dolorem nesciunt distinctio tempore, ex dolores amet? Totam provident vero nam voluptates debitiseos veritatis, fugit unde, beatae deserunt nisi
-    tempore saepe illo eveniet quae ratione expedita dolorum odio facilis ipsum animi. Qui, officiis voluptatem ex similique vitae porro error ipsam autem delectus eum, iusto assumenda accusantium atque nesciunt omnis animi magni fuga molestiae asperiores
-    cumque?
-  </p>
+  <div class='main'>
+    <p class='title'>What are You Gonna do Today?</p>
+    <div id='menu-wrapper'>
+      <div id='menu'>
+        <a id='select' type='text'>Click to Choose...</a>
+        <ul id='pulldown'>
+          <li id='li-1' class='line-item'>Fire Up the Grill</li>
+          <li id='li-2' class='line-item'>Go to the Cinerama</li>
+          <li id='li-3' class='line-item'>Hit the Club with Your Posse</li>
+          <li id='li-4' class='line-item'>Stay in and Read a Book</li>
+          <li id='li-5' class='line-item'>Go to the Gym</li>
+        </ul>
+      </div>
+      <button id='submit'>
+        GO DO THE THING
+        <strong>&#x21e8</strong>
+      </button>
+    </div>
+  </div>
 </body>
 
 </html>
