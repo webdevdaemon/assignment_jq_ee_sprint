@@ -31,8 +31,7 @@ $(document).ready(function() {
     e.stopPropagation();
     console.log({the_state});
   });
-  // </1>
-  // <1> jQuery DOM ELEMENTS
+
   const $power_switch = $('.switch'), // <-- $ Power Switch
     $power_knob = $('.knob'), // <-- $ Power Knob
     $color_panels = $('.panel'), // <-- $ Color Panels
@@ -45,15 +44,15 @@ $(document).ready(function() {
   $(document).on('click', 'div.panel', function(e) {
     afterEveryClick(e);
   });
-  const _cloneState  = obj => Object.create(obj),
-    _updateState = updater => Object.assign({}, the_state, updater);
+  const _cloneState  = target => Object.create(target),
+        _updateState = nxt => Object.assign({}, the_state, nxt);
 
   function updateUI(curr = the_state, prev = the_previous) {
   }
 
   function cycleUpdate(nu_state = {}) {
-    the_previous =
-    the_state =
+    the_previous = the_state;
+    the_state = nu_state
     updateUI(the_state);
   }
   function afterEveryClick(event) {
