@@ -1,4 +1,5 @@
 div {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -13,17 +14,23 @@ body {
 button {
   outline: none;
   border: solid 2px white;
+  -webkit-box-shadow: 5px 5px 2px #000;
   box-shadow: 5px 5px 2px #000;
+  -webkit-transition: ease-in .4s all;
   transition: ease-in .4s all;
 }
 
 button:hover {
+  -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
 
 button:active {
+  -webkit-transition: none;
   transition: none;
+  -webkit-transform: translate(2px, 2px);
   transform: translate(2px, 2px);
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
@@ -31,9 +38,18 @@ button:active {
   height: 100%;
   margin: auto;
   padding: 0 5vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
 }
 
@@ -57,11 +73,16 @@ button:active {
 }
 
 .header .title-wrap {
-  display: -webkit-flex;
   display: -ms-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 10vmin;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin: 2vmin auto 1vmin auto;
   padding: 0;
@@ -84,6 +105,7 @@ button:active {
   padding: 0 1vmin;
   margin: 0 1vmin 0 1.5vmin;
   text-shadow: none;
+  -webkit-box-shadow: 0 0 20px #fff;
   box-shadow: 0 0 20px #fff;
 }
 
@@ -106,9 +128,18 @@ button:active {
 
 .app {
   background: transparent;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   height: 100vmin;
   width: 100vmin;
@@ -174,22 +205,39 @@ button:active {
 }
 
 .panel-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 50%;
 }
 
 .top {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
 }
 
 .bottom {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
   flex-direction: row-reverse;
 }
 
 .overlay {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   position: absolute;
   height: 100%;
@@ -197,13 +245,23 @@ button:active {
 }
 
 .center {
+  -webkit-box-sizing: content-box;
   box-sizing: content-box;
   background: #a5acaf;
   border: solid 3vmin black;
   border-radius: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   max-height: calc(900px/2.3);
   min-height: calc(400px/2.3);
@@ -217,9 +275,18 @@ button:active {
 }
 
 .center .unit-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin: 0;
   width: 100%;
@@ -231,10 +298,19 @@ button:active {
 }
 
 .center .unit-label .label {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   font-family: 'aldrich';
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   height: inherit;
 }
@@ -250,9 +326,17 @@ button:active {
 }
 
 .center .interface {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -ms-flex-pack: distribute;
   justify-content: space-around;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
   align-items: flex-start;
   max-height: calc(900px/2.3/3);
   min-height: calc(400px/2.3/3);
@@ -265,9 +349,18 @@ button:active {
 
 .center .interface .ui-node {
   height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin: auto;
 }
@@ -281,14 +374,21 @@ button:active {
 }
 
 .center .interface .position {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin: auto;
   padding: 0;
 }
 
 .center .interface .position .digits {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
   background: #000;
@@ -306,9 +406,18 @@ button:active {
 }
 
 .center .interface .start-reset {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   height: 100%;
   margin: auto;
@@ -329,9 +438,18 @@ button:active {
 }
 
 .center .interface .strict {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   height: 100%;
   margin: auto;
@@ -361,8 +479,14 @@ button:active {
 }
 
 .center .power-switch .switch {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
   margin: 0;
   padding: 0;
@@ -382,6 +506,8 @@ button:active {
 }
 
 .center .power-switch .on {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
   justify-content: flex-end;
 }
 
