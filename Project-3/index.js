@@ -45,9 +45,7 @@ $(document).ready(function() {
   });
   // START-RESET CLICK HANDLER
   $start_reset.on('click', function() {
-    if (!_state.on) {
-      return;
-    }
+    if (!_state.on) {return;}
     if (_state.running) {
       _state = Object.assign(INITIAL_STATE, {
         running: false,
