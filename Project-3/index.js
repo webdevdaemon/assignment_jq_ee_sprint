@@ -1,16 +1,20 @@
 const INITIAL_STATE = {
-  on: false,
-  running: false,
-  user_turn: false,
-  strict: false,
-  sequence: [],
-  target_length: 1,
-  target: '',
-  clicked: [],
-  input: '',
-  length: 0,
-};
-let _state = Object.assign({}, INITIAL_STATE);
+    on: false,
+    running: false,
+    user_turn: false,
+    strict: false,
+    sequence: [],
+    target_length: 1,
+    target: '',
+    clicked: [],
+    input: '',
+    length: 0,
+  },
+  updateState = obj => {
+    _state = Object.assign({}, _state, obj);
+  };
+
+let _state = Object.assign({}, {}, INITIAL_STATE);
 
 $(document).ready(function() {
   const $power_switch = $('.switch'), // <-- $ Power Switch
@@ -30,30 +34,28 @@ $(document).ready(function() {
   });
 
   // COLOR PANELS CLICK HANDLER
-  $color_panels.click(function() {
-    let id = $(this).get(0).id;
-    activatePanel(id);
-    if (_state.running && ok) {
-      updateState({length: _state.length + 1});
-      updateLengthDisplay(_state.length);
+  $color_panels.click(function(e) {
+    activatePanel(e.target.id);
+    updateState({ length: _state.length + 1 });
+    updateLengthDisplay(_state.length);
+    if (_state.user_turn) {
       console.log('O%', $(this).get(0).id, 'CORRECT!!!');
     } else {
     }
   });
   // START-RESET CLICK HANDLER
   $start_reset.on('click', function() {
-    if (!_state.on) {return;}
+    if (!_state.on) {
+      return;
+    }
     if (_state.running) {
-      _state = Object.assign(
-        INITIAL_STATE,
-        {
-          running: false,
-          user_turn: false,
-          sequence: getNewSequence(),
-          target_length: 1,
-        }
-      )
-      updateLengthDisplay(_state.target_length)
+      _state = Object.assign(INITIAL_STATE, {
+        running: false,
+        user_turn: false,
+        sequence: getNewSequence(),
+        target_length: 1,
+      });
+      updateLengthDisplay(_state.target_length);
     }
     _state.sequence = getNewSequence();
   });
@@ -70,7 +72,9 @@ $(document).ready(function() {
     }, ms);
   }
   function playAudioById(str) {
-    $(`#panel-tone-${str}`).get(0).play();
+    $(`#panel-tone-${str}`)
+      .get(0)
+      .play();
   }
   function playbackSequence(length = _state.length) {
     let i = 0;
@@ -81,14 +85,18 @@ $(document).ready(function() {
         i++;
         updateLengthDisplay(i);
       } else {
-        updateState({user_turn: true});
+        updateState({ user_turn: true });
         clearInterval(playbackSequence.playbackInterval);
       }
     }, 780);
   }
   function updateLengthDisplay(length = 0) {
-    $length_display.text(length !== null ? _getDisplayLength(length) : '');
+    $length_display.text(length !== null ? getDisplayLength(length) : '--');
   }
+  function getDisplayLength(num = 0) {
+    return num > 9 ? `${num}` : `0${num}`;
+  }
+
   function getNewSequence(length = 20) {
     let colors = ['r', 'g', 'b', 'y'],
       seq = [],
