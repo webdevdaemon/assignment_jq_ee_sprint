@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/8.9.1/bin/node /usr/local/Cellar/yarn/1.3.2/libexec/bin/yarn.js add esformatter-curly
+  /usr/local/Cellar/node/8.9.1/bin/node /usr/local/Cellar/yarn/1.3.2/libexec/bin/yarn.js add eslint-plugin-env
 
 PATH: 
   /usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/node_modules/.bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/bin

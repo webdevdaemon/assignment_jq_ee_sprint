@@ -1,51 +1,57 @@
 {
-  "parser": "babel-eslint",
-  "env": {
-    "browser": true,
-    "es6": true,
-    "node": true
-  },
-  "parserOptions": {
-    "ecmaversion": 8,
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
     },
-    "sourceType": "module"
-  },
-  "plugins": [
-    "env",
-    "prettier"
-  ],
-  "extends": [
-    "prettier"
-  ],
-  "rules": {
-    "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
-    "linebreak-style": 0,
-    "no-console": 0,
-    "no-undef": 0,
-    "indent": [
-      0,
-      2
+    "parserOptions": {
+        "ecmaversion": 8,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "env",
+        "prettier"
     ],
-    "react/jsx-closing-bracket-location": 0,
-    "react/jsx-indent-props": [
-      0,
-      2
+    "extends": [
+        "prettier"
     ],
-    "react/jsx-indent": [
-      0,
-      2
-    ],
-    "react/jsx-no-undef": 0,
-    "no-unused-vars": 0,
-    "no-unused-expressions": 0,
-    "jsx-a11y/href-no-hash": 0,
-    "semi": [
-      2,
-      "always"
-    ],
-    "no-extra-semi": 2
-  }
+    "rules": {
+        "brace-style": [
+            "error",
+            "1tbs",
+            {
+                "allowSingleLine": true
+            }
+        ],
+        "linebreak-style": 0,
+        "no-console": 0,
+        "no-undef": 0,
+        "indent": [
+            0,
+            2
+        ],
+        "react/jsx-closing-bracket-location": 0,
+        "react/jsx-indent-props": [
+            0,
+            2
+        ],
+        "react/jsx-indent": [
+            0,
+            2
+        ],
+        "react/jsx-no-undef": 0,
+        "no-unused-vars": 0,
+        "no-unused-expressions": 0,
+        "jsx-a11y/href-no-hash": 0,
+        "semi": [
+            2,
+            "always"
+        ],
+        "no-extra-semi": 2
+    }
 }
