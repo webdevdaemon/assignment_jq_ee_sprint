@@ -1,174 +1,171 @@
-
-
-// <1> init state & update state
 const INITIAL_STATE = {
-		clicked: [],
-		input: '',
-		length: 0,
-		on: false,
-		playback: false,
-		required_length: 5,
-		sequence: [],
-		strict: false,
-		target: '',
-		user_turn: false,
-		ok: true;
-	},
-	updateState = (obj, ...callbacks) => {
-		let current = _state;
-		_state = Object.assign({}, current, obj);
-		return (!callbacks[0] || (function() {
-			console.log(callbacks);
-			callbacks.forEach(fn => fn());
-		})());
-	};
-// </1>
+    clicked: [],
+    input: '',
+    length: 5,
+    ok: true,
+    on: false,
+    playback: false,
+    required_length: 5,
+    sequence: [],
+    strict: false,
+    target: '',
+    user_turn: false,
+  },
+  updateState = (obj, ...callbacks) => {
+    let current = Object.assign({}, _state);
+    _state = Object.assign({}, current, obj);
+    console.table([current, _state]);
+    return (!callbacks[0] || (function() {
+      callbacks.forEach(fn => fn());
+    })());
+  };
 let _state = Object.assign({}, INITIAL_STATE);
 $(document).ready(function() {
-	// <1> jQuery Objects & Click Event Handlers
-	const $power_switch = $('.switch'), // <-- $ Power Switch
-		// $power_knob = $('.knob'),  <-- $ Power Knob
-		$color_panels = $('.panel'), // <-- $ Color Panels
-		$start_reset = $('.start-reset'), // <-- $ Start Stop Button
-		$strict_mode = $('.strict'), // <-- $ Strict Mode Button
-		$length_display = $('.digits'), // <-- $ Length Display
-		$game_status = $('.status'); // <-- $ Status Display
+  const $power_switch = $('.switch'), // <-- $ Power Switch
+    $color_panels = $('.panel'), // <-- $ Color Panels
+    $start_reset = $('.start-reset'), // <-- $ Start Stop Button
+    $strict_mode = $('.strict'), // <-- $ Strict Mode Button
+    $length_display = $('.digits'), // <-- $ Length Display
+    $game_status = $('.status'); // <-- $ Status Display
+  $power_switch.click(function() {
+    updateState({
+      on: !_state.on,
+      length: updateLengthDisplay(0),
+      sequence: getNewSequence(),
+    });
+    $power_switch.toggleClass('on');
+    $length_display.toggleClass('on');
+  });
+  $color_panels.click(colorPanel);
 
-	// POWER SWITCH CLICK HANDLER
-	$power_switch.click(function() {
-		updateState({
-			on: !_state.on,
-			length: updateLengthDisplay(0)
-		});
-		$power_switch.toggleClass('on');
-		$length_display.toggleClass('on');
-	});
+  $start_reset.click(function() {
+    if (!_state.on) { return; }
+    if (!_state.playback) { gameReset(); }
+    if (_state.playback) {
+      clearInterval(playbackSequence.playbackInterval);
+      gameReset();
+    }
+    // updateState({sequence: getNewSequence()});
+  });
 
-	// COLOR PANELS CLICK HANDLER
-	$color_panels.click(colorPanel);
-	// START-RESET CLICK HANDLER
-	$start_reset.on('click', function() {
-		if (!_sbtate.on) {
-			return;
-		}
-		if (_state.playback) {
-			clearInterval(playbackSequence.playbackInterval);
-			updateState({
-				user_turn: false,
-				sequence: getNewSequence(),
-				length: updateLengthDisplay(0),
-			}, playbackSequence);
-			updateLengthDisplay(_state.required_length);
-		}
-		updateState({sequence: getNewSequence()});
-	});
-	// </1>
+  function gameStart(required_length = _state.required_length) {
+    updateState({
+      required_length,
+      length: updateLengthDisplay(0),
+      user_turn: false,
+      playback: true,
+    }, () => {
+      setTimeout(() => {
+        playbackSequence(_state.required_length);
+      }, 1000);
+    });
+  }
 
-	// <2> functions - GAME OPS
-	function gameStart() {
-		playbackSequence(_state.length);
-		updateState({running: true});
-	}
+  function gameReset() {
+    updateState({
+      user_turn: false,
+      playback: false,
+      sequence: getNewSequence(),
+      length: updateLengthDisplay(0),
+      required_length: 5
+    }, gameStart);
+  }
 
-	function gameReset() {
-		updateState({
-			running: false,
-			user_turn: false,
-			sequence: getNewSequence(),
-			length: updateLengthDisplay(0),
-			required_length: 1,
-		});
-	}
+  function userStart(dex = _state.required_length) {
+    let uStream = Rx.Observable.fromEvent($color_panels, 'click');
+    let uTurn = uStream.take(dex)
+    .map((evt, idx) => {
+      let color = evt.target.id;
+      console.log(color);
+      if (color === _state.sequence[idx]) {
+        console.log(`CORRECT: ${color}`);
 
-	function strictMode() {
-		updateState({
-			strict: !_state.strict
-		});
-	}
+      } else {
+        console.error(`INCORRECT: ${color}`);
+        updateState({
+          ok: false,
+          user_turn: false,
+          playback: true
+        }, () => {
+          $game_status.text('WRONG!!!');
+          setTimeout(() => { playbackSequence(); }, 2000);
+        });
+      }
+    });
+    let sub = uTurn.subscribe((x))
+  }
 
-	function initUserTurn() {
-		updateState({clicked: [], input: ''});
-	}
+  function userReset() {
+    updateState({
+      clicked: [],
+      input: '',
+    }, userStart);
+  }
 
-	function colorPanel(e) {
-		let {on, playback, user_turn, clicked, segment} = _state,
-			pressed = e.target.id;
-		if (!on || playback) {
-			return;
-		}
-		if (user_turn) {}
-		activatePanel($(e.target).get(0).id);
-	}
+  function strictMode() {
+    updateState({
+      strict: !_state.strict
+    });
+  }
 
-	// </2>
+  function colorPanel(e) {
+    if (!_state.on || _state.playback) {
+      return;
+    }
+    if (_state.user_turn) {
+      activatePanel(e.target.id)
+    }
+    // if(_state.user_turn) {}
+  }
 
-	// <3>
-	function activatePanel(color_str) {
-		let $panel = $(`#${color_str}`),
-			ms = _state.error
-				? 2000
-				: 750;
-		$panel.addClass('active');
-		$(`#panel-tone-${color_str}`).get(0).play();
-		setTimeout(function() {
-			$panel.removeClass('active');
-		}, ms);
-	}
+  function activatePanel(color_str) {
+    let $panel = $(`#${color_str}`);
+    $panel.addClass('active');
+    $(`#panel-tone-${color_str}`).get(0).play();
+    setTimeout(function() {
+      $panel.removeClass('active');
+    }, 1000);
+  }
 
-	function playbackSequence(length = _state.required_length) {
-		let i = 0;
-		updateLengthDisplay(i);
-		playbackSequence.playbackInterval = setInterval(function() {
-			if (i < length) {
-				activatePanel(_state.sequence[i]);
-				i++;
-				updateLengthDisplay(i);
-			} else {
-				clearInterval(playbackSequence.playbackInterval);
-				updateState({
-					playback: false
-				}, initUserTurn);
-			}
-		}, 780);
-	}
+  function playbackSequence(length = _state.required_length) {
+    let i = 0;
+    updateLengthDisplay(i);
+    playbackSequence.playbackInterval = setInterval(function() {
+      if (i < length) {
+        activatePanel(_state.sequence[i]);
+        i++;
+        updateLengthDisplay(i);
+      } else {
+        clearInterval(playbackSequence.playbackInterval);
+        userReset();
+      }
+    }, 1100);
+  }
 
-	function getDisplayLength(num = 0) {
-		return num > 9
-			? `${num}`
-			: `0${num}`;
-	}
+  function stopPlaybackStartUser() {
+    updateState({
+      playback: false,
+    }, userReset);
+  }
 
-	function updateLengthDisplay(length) {
-		$length_display.text(
-			length !== null
-			? getDisplayLength(length)
-			: '--');
-		return length;
-	}
+  function getDisplayLength(num = 0) {
+    return num > 9 ? `${num}` : `0${num}`;
+  }
 
-	function getNewSequence(length = 20) {
-		let colors = [ 'r', 'g', 'b', 'y', ],
-			seq = [],
-			i;
-		for (i = 0; i < length; i++) {
-			let n = Math.floor(Math.random() * (5 - 1)) + 1;
-			seq = [
-				...seq,
-				colors[n - 1],
-			];
-			console.log(seq);
-		}
-		return seq;
-	}
+  function updateLengthDisplay(length) {
+    $length_display.text(getDisplayLength(length));
+    return length;
+  }
 
-	// DEBUG
-	updateState({
-		sequence: getNewSequence()
-	}, playbackSequence, function() {
-		console.log('fn_one');
-	}, function() {
-		console.log('fn_two');
-	}, function() {
-		console.log('fn_tre');
-	});
+  function getNewSequence(length = 20) {
+    let colors = ['r', 'g', 'b', 'y'],
+      seq = [],
+      i;
+    for (i = 0; i < length; i++) {
+      let n = Math.floor(Math.random() * (5 - 1)) + 1;
+      seq = [...seq, colors[n - 1]];
+    }
+    console.log(seq);
+    return seq;
+  }
 });

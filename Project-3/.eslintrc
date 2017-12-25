@@ -43,7 +43,7 @@
     "no-unused-expressions": 0,
     "jsx-a11y/href-no-hash": 0,
     "semi": [
-      1,
+      2,
       "always"
     ],
     "no-extra-semi": 2

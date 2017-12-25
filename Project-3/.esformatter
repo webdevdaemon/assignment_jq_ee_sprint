@@ -12,8 +12,19 @@
 	      "FunctionDeclarationClosingBrace": "<=1"
 	    },
 	    "after": {
-	      "FunctionDeclaration": "1",
+	      "FunctionDeclaration": 1,
 	      "FunctionDeclarationOpeningBrace": "<=1"
+	    }
+	  },
+	"whitespace": {
+	    "before": {
+	      "FunctionDeclaration": 0,
+	      "FunctionDeclarationOpeningBrace": 1,
+	      "FunctionDeclarationClosingBrace": 0
+	    },
+	    "after": {
+	      "FunctionDeclaration": "<=1",
+	      "FunctionDeclarationOpeningBrace": 0
 	    }
 	  },
 	"jsx": {
@@ -40,13 +51,13 @@
 	"collapseObjects": {
 		"ObjectExpression": {
 			"maxLineLength": 120,
-			"maxKeys": 3,
+			"maxKeys": 6,
 			"maxDepth": 2,
 			"forbidden": []
 		},
 		"ArrayExpression": {
 			"maxLineLength": 120,
-			"maxKeys": 3,
+			"maxKeys": 6,
 			"maxDepth": 2,
 			"forbidden": []
 		}
