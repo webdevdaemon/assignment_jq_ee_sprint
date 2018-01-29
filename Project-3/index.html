@@ -3,83 +3,84 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>JavaScript Example: Simon Game</title>
+    <meta charset="UTF-8">
+    <title>JavaScript Example: Simon Game</title>
 
-  <script src="http://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/rxjs/bundles/Rx.min.js"></script>
-  <script src="index.js"></script>
-  <!-- <script src="tester.js"></script> -->
-  <link href="style.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="app-wrapper">
-    <div class='header'>
-      <div class='title-wrap'><p class="title">SIMON</p><div class='js'>JS</div></div>
-      <p class="subtitle">Re-visiting the Classic 4-color Memory Game</p>
-      <div class="status-wrapper">
-        <p class="status">
-          <audio src="./audio/efx_NO-Fabio_Farinelli-955789468.mp3" id='no'>
-          </audio>
-          OK
-        </p>
-      </div>
+    <div class="app-wrapper">
+        <div class='header'>
+            <div class='title-wrap'>
+                <p class="title">SIMON</p>
+                <div class='js'>JS</div>
+            </div>
+            <p class="subtitle">
+                Revisiting the Classic 4-color Sequential Memory Game
+            </p>
+        </div>
+        <div class="status-wrapper">
+          <p class='simon-sez'>SIMON'S STATUS:</p>
+          <audio src="./audio/efx_NO-Fabio_Farinelli-955789468.mp3" id='no'></audio>
+          <p class="status">OK</p>
+        </div>
+        <div class="app">
+            <div class="center" id="c-panel">
+                <div class="unit-label">
+                    <span class="label top">simon</span>
+                    <span class="label bottom">SEZ</span>
+                </div>
+                <div class="interface">
+                    <div class="ui-node position">
+                        <p class='digits on'>
+                            --
+                        </p>
+                        <p class="ui-label">steps</p>
+                    </div>
+                    <div class="ui-node start-reset">
+                        <button id='toggle'></button>
+                        <p class="ui-label">start/reset</p>
+                    </div>
+                    <div class="ui-node strict">
+                        <button id='init'></button>
+                        <p class="ui-label">strict</p>
+                    </div>
+                </div>
+                <div class="power-switch">
+                    <div class="switch on">
+                        <button class="knob" id='on-off'>
+                ON
+              </button>
+                    </div>
+                </div>
+            </div>
+            <div class="simon">
+                <div class="panel-row top">
+                    <div class="panel red" id="r">
+                        <audio src='https://s3.amazonaws.com/freecodecamp/simonSound1.mp3' id='panel-tone-r'></audio>
+                    </div>
+                    <div class="panel green" id="g">
+                        <audio src='https://s3.amazonaws.com/freecodecamp/simonSound2.mp3' id='panel-tone-g'></audio>
+                    </div>
+                </div>
+                <div class="panel-row bottom">
+                    <div class="panel blue" id="b">
+                        <audio src='https://s3.amazonaws.com/freecodecamp/simonSound3.mp3' id='panel-tone-b'></audio>
+                    </div>
+                    <div class="panel yellow" id="y">
+                        <audio src='https://s3.amazonaws.com/freecodecamp/simonSound4.mp3' id='panel-tone-y'></audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p class="info"></p>
+            <p class="author"></p>
+        </div>
     </div>
-    <div class="app">
-      <div class="center" id="c-panel">
-        <div class="unit-label">
-          <span class="label top">simon</span>
-          <span class="label bottom">SEZ</span>
-        </div>
-        <div class="interface">
-          <div class="ui-node position">
-            <p class='digits'>--</p>
-            <p class="ui-label">steps</p>
-          </div>
-          <div class="ui-node start-reset">
-            <button id='toggle'></button>
-            <p class="ui-label">start/reset</p>
-          </div>
-          <div class="ui-node strict">
-            <button id='init'></button>
-            <p class="ui-label">strict</p>
-          </div>
-        </div>
-        <div class="power-switch">
-          <div class="switch">
-            <button class="knob" id='on-off'>
-              ON
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="simon">
-        <div class="panel-row top">
-          <div class="panel red" id="r">
-            <audio src='https://s3.amazonaws.com/freecodecamp/simonSound1.mp3' id='panel-tone-r'></audio>
-          </div>
-          <div class="panel green" id="g">
-            <audio src='https://s3.amazonaws.com/freecodecamp/simonSound2.mp3' id='panel-tone-g'></audio>
-          </div>
-        </div>
-        <div class="panel-row bottom">
-          <div class="panel blue" id="b">
-            <audio src='https://s3.amazonaws.com/freecodecamp/simonSound3.mp3' id='panel-tone-b'></audio>
-          </div>
-          <div class="panel yellow" id="y">
-            <audio src='https://s3.amazonaws.com/freecodecamp/simonSound4.mp3' id='panel-tone-y'></audio>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <p class="info"></p>
-      <p class="author"></p>
-    </div>
-  </div>
 </body>
 
 </html>
