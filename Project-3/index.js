@@ -1,6 +1,6 @@
-//-----------//
+// -----------//
 // GAME INIT //
-//-----------//
+// -----------//
 let comp_seq = [],
   level = 4,
   display_level = 0,
@@ -13,24 +13,24 @@ function getNewSequence(length = 20) {
     seq = [],
     i;
   for (i = 0; i < length; i++) {
-    let n = Math.floor(Math.random() * (5 - 1)) + 1;
+    const n = Math.floor(Math.random() * (5 - 1)) + 1;
     seq = [...seq, colors[n - 1]];
     console.log(seq);
   }
   return seq;
 }
-$(document).ready(function() {
+$(document).ready(() => {
   const $color_panels = $('.panel'), // <-- $ Color Panels
     $start_reset = $('.start-reset'), // <-- $ Start Stop Button
     $strict_mode = $('.strict'), // <-- $ Strict Mode Button
     $length_display = $('.digits'), // <-- $ Length Display
     $app_background = $('.app-wrapper'),
     $status_display = $('.status'); // <-- $ Status Display
-  //----------------//
+  // ----------------//
   // click handlers //
-  //----------------//
-  $color_panels.click(function(e) {
-    let t = e.target.id;
+  // ----------------//
+  $color_panels.click((e) => {
+    const t = e.target.id;
     console.log(t);
     if (user_turn && display_level <= level && display_level > 0) {
       if (t !== comp_seq[level - display_level]) {
@@ -46,10 +46,10 @@ $(document).ready(function() {
         playbackSequence(level);
       }
     } else {
-      return;
+
     }
   });
-  $start_reset.click(function() {
+  $start_reset.click(() => {
     if (!ok) {
       $color_panels.removeClass('error');
       $app_background.removeClass('error');
@@ -78,12 +78,11 @@ $(document).ready(function() {
     $status_display.text('WRONG!!!');
     $color_panels.addClass('error');
     // setTimeout(() => {}, 3000);
-    return;
   }
 
   function playbackSequence(lvl = level) {
     let i = 1;
-    playbackSequence.playbackInterval = setInterval(function() {
+    playbackSequence.playbackInterval = setInterval(() => {
       if (i <= lvl) {
         display_level = updateLevelDisplay(i);
         activatePanel(comp_seq[i - 1]);
@@ -105,10 +104,10 @@ $(document).ready(function() {
   }
 
   function activatePanel(color_str) {
-    let $panel = $(`#${color_str}`);
+    const $panel = $(`#${color_str}`);
     $playAudio($(`#panel-tone-${color_str}`));
     $panel.addClass('active');
-    setTimeout(function() {
+    setTimeout(() => {
       $panel.removeClass('active');
     }, 750);
   }

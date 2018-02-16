@@ -1,3 +1,10 @@
 {
-    "extends": "airbnb-base"
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 8
+  }
+  "plugins": [
+    "react",
+    "env"
+  ]
 }
