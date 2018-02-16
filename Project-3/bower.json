@@ -1,0 +1,27 @@
+{
+  "name": "project-3",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "webDevDaemon - (Charles M.) <webdevdaemon@gmail.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "simon",
+    "jquery",
+    "js",
+    "javascript"
+  ],
+  "homepage": "https://github.com/webdevdaemon/assignment_jq_ee_sprint",
+  "moduleType": [
+    "es6"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

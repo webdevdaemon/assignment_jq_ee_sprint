@@ -1,0 +1,13 @@
+[ignore]
+<PROJECT_ROOT>/node_modules/.*/spec/.*
+.*/node_modules/config-chain/test/broken.json
+
+[include]
+<PROJECT_ROOT>/
+<PROJECT_ROOT>/*/src
+
+[libs]
+
+[options]
+
+[version]
