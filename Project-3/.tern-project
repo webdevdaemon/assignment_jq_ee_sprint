@@ -1,13 +1,13 @@
 {
   "ecmaVersion": "7",
   "libs": [
-		"jquery",
-		"browser"
-	],
+    "jquery",
+    "browser"
+  ],
   "loadEagerly": [],
   "dontLoad": [
-		"node_modules/**"
-	],
+    "node_modules/**"
+  ],
   "plugins": {
     "doc_comment": true,
     "node": {
@@ -20,6 +20,7 @@
       "dontLoad": "",
       "load": "",
       "modules": ""
-    }
+    },
+    "node_resolve": {}
   }
 }

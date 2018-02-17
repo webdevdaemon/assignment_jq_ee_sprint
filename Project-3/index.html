@@ -8,30 +8,23 @@
 
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
     <script src="index.js"></script>
-    <link href="style.css" rel="stylesheet">
+    <link href="style.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="app-wrapper">
-        <div class='header'>
-            <div class='title-wrap'>
-                <p class="title">SIMON</p>
-                <div class='js'>JS</div>
-            </div>
-            <p class="subtitle">
-                Revisiting the Classic 4-color Sequential Memory Game
-            </p>
-        </div>
-        <div class="status-wrapper">
-          <p class='simon-sez'>SIMON'S STATUS:</p>
-          <audio src="./audio/efx_NO-Fabio_Farinelli-955789468.mp3" id='no'></audio>
-          <p class="status">OK</p>
-        </div>
+      <div class="status-wrapper">
+        <audio src="./audio/efx_NO-Fabio_Farinelli-955789468.mp3" id='no'>
+
+        </audio>
+
+      </div>
         <div class="app">
             <div class="center" id="c-panel">
                 <div class="unit-label">
                     <span class="label top">simon</span>
-                    <span class="label bottom">SEZ</span>
+                    <!-- <span class="label bottom">SEZ</span> -->
+                    <p class="status">OK</p>
                 </div>
                 <div class="interface">
                     <div class="ui-node position">

@@ -1,118 +1,121 @@
-// -----------//
-// GAME INIT //
-// -----------//
+// -----------// GAME INIT -----------//
 let comp_seq = [],
   level = 4,
   display_level = 0,
   user_turn = false,
   ok = true,
-  strict = false;
+  strict = false
 
 function getNewSequence(length = 20) {
   let colors = ['r', 'g', 'b', 'y'],
     seq = [],
-    i;
+    i
   for (i = 0; i < length; i++) {
-    const n = Math.floor(Math.random() * (5 - 1)) + 1;
-    seq = [...seq, colors[n - 1]];
-    console.log(seq);
+    const n = Math.floor(Math.random() * (5 - 1)) + 1
+    seq = [...seq, colors[n - 1]]
+    console.log(seq)
   }
-  return seq;
+  return seq
 }
 $(document).ready(() => {
-  const $color_panels = $('.panel'), // <-- $ Color Panels
-    $start_reset = $('.start-reset'), // <-- $ Start Stop Button
-    $strict_mode = $('.strict'), // <-- $ Strict Mode Button
-    $length_display = $('.digits'), // <-- $ Length Display
-    $app_background = $('.app-wrapper'),
-    $status_display = $('.status'); // <-- $ Status Display
-  // ----------------//
-  // click handlers //
-  // ----------------//
-  $color_panels.click((e) => {
-    const t = e.target.id;
-    console.log(t);
-    if (user_turn && display_level <= level && display_level > 0) {
-      if (t !== comp_seq[level - display_level]) {
-        userError();
-      }
-      console.log('correct');
-      activatePanel(t);
-      display_level--;
-      updateLevelDisplay(display_level);
+  const $color_panels = $('.panel'), // <- Color Panels
+    $start_reset = $('.start-reset'), // <- Start Reset Button
+    $strict_mode = $('.strict'), // <-- Strict Mode Button
+    $length_display = $('.digits'), // <- Length Display
+    $app_background = $('.app-wrapper'), // <- UI
+    $status_display = $('.status'), // <- Status Display
+    $power_switch = $('.power-switch')// <- Power Switch
+
+  /*   \/                \ /
+       /-----------------/|\
+      / click handlers  / | \
+     /_________________/__|__\  */
+
+  $color_panels.click(e => {
+    if (!user_turn) {
+      return
+    } else if (user_turn && display_level <= level && display_level > 0) {
+      const t = e.target.id
+      t !== comp_seq[level - display_level] && userFail()
+      activatePanel(t)
+      display_level--
+      updateLevelDisplay(display_level)
       if (display_level === 0) {
-        user_turn = false;
-        level++;
-        playbackSequence(level);
+        user_turn = false
+        level++
+        playbackSequence(level)
       }
-    } else {
-
     }
-  });
+  })
+
   $start_reset.click(() => {
-    if (!ok) {
-      $color_panels.removeClass('error');
-      $app_background.removeClass('error');
-      $status_display.removeClass('error');
-      $status_display.text('OK');
-    }
-    gameRestart();
-  });
+    !ok && toggleFailState()
+    gameRestart()
+  })
 
-  function gameRestart() {
-    comp_seq = getNewSequence();
-    level = 4;
-    display_level = updateLevelDisplay(0);
-    user_turn = false;
-    ok = true;
-    strict = false;
-    playbackSequence();
+  $power_switch.click(() => {
+    const $pow = $power_switch.children('.switch')
+    ;($pow.hasClass('on') && $pow.removeClass('on')) || $pow.addClass('on')
+  })
+
+  function toggleFailState() {
+    !ok && $status_display.text('OK') || $status_display.text('FAIL!!!')
+    $color_panels.toggleClass('error')
+    $app_background.toggleClass('error')
+    $status_display.toggleClass('error')
   }
 
-  function userError() {
-    ok = false;
-    user_turn = false;
-    $playAudio($('#no'));
-    $app_background.addClass('error');
-    $status_display.addClass('error');
-    $status_display.text('WRONG!!!');
-    $color_panels.addClass('error');
-    // setTimeout(() => {}, 3000);
+  f
+
+  function gameRestart() {
+    comp_seq = getNewSequence()
+    level = 4
+    display_level = updateLevelDisplay(0)
+    user_turn = false
+    ok = true
+    strict = false
+    playbackSequence()
+  }
+
+  function userFail() {
+    ok = false
+    user_turn = false
+    toggleFailState()
   }
 
   function playbackSequence(lvl = level) {
-    let i = 1;
+    let i = 1
     playbackSequence.playbackInterval = setInterval(() => {
       if (i <= lvl) {
-        display_level = updateLevelDisplay(i);
-        activatePanel(comp_seq[i - 1]);
-        i++;
+        display_level = updateLevelDisplay(i)
+        activatePanel(comp_seq[i - 1])
+        i++
       } else {
-        clearInterval(playbackSequence.playbackInterval);
-        user_turn = true;
+        clearInterval(playbackSequence.playbackInterval)
+        user_turn = true
       }
-    }, 780);
+    }, 780)
   }
 
   function getDisplayLevel(num = 0) {
-    return num > 9 ? `${num}` : `0${num}`;
+    return num > 9 ? `${num}` : `0${num}`
   }
 
   function updateLevelDisplay(length = 0) {
-    $length_display.text(getDisplayLevel(length));
-    return length;
+    $length_display.text(getDisplayLevel(length))
+    return length
   }
 
   function activatePanel(color_str) {
-    const $panel = $(`#${color_str}`);
-    $playAudio($(`#panel-tone-${color_str}`));
-    $panel.addClass('active');
+    const $pnl = $(`#${color_str}`)
+    $playAudio($(`#panel-tone-${color_str}`))
+    $pnl.addClass('active')
     setTimeout(() => {
-      $panel.removeClass('active');
-    }, 750);
+      $pnl.removeClass('active')
+    }, 750)
   }
 
-  function $playAudio($_el) {
-    $_el.get(0).play();
+  function $playAudio($el) {
+    $el && $el.get(0).play()
   }
-});
+})

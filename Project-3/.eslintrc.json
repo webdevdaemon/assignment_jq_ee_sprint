@@ -2,9 +2,9 @@
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 8
+  },
+  "plugins": ["env"],
+  "rules": {
+    "semi": ["error", "never"]
   }
-  "plugins": [
-    "react",
-    "env"
-  ]
 }
